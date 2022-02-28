@@ -1,5 +1,8 @@
 package com.childcare.healthsafety.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.catalina.User;
+
 import javax.persistence.*;
 
 @Entity // because there is a database
@@ -25,6 +28,21 @@ public class Activity {
     this.number = number;
     this.name = name;
   }
+
+  @ManyToOne
+  @JoinColumn(name = "activity_id")
+  private Activity activity;
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+
+  @JsonIgnore
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
+
 
   public Activity() {
 

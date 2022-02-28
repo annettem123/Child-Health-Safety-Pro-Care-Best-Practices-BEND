@@ -1,12 +1,15 @@
 package com.childcare.healthsafety.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
+
 
 @Entity // means it's going to be a database
 @Table(name = "categories") // create a new table called categories
-
-
-
 public class Category {
 
     @Id // @Id means primary key
@@ -19,6 +22,24 @@ public class Category {
 
     @Column
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "activity_id")
+    @JsonIgnore
+    private Activity activity;
+
+
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Activity> activityList;
+
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
+    }
 
     public Category() {
     }
