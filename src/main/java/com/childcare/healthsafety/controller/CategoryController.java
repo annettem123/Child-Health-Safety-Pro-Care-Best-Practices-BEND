@@ -38,8 +38,9 @@ public class CategoryController {
     }
 
     @GetMapping(path = "/categories/")
-    public String getAllCategories() {
-        return "all categories";
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
+
     }
 
     @PostMapping("/categories/")
@@ -51,7 +52,7 @@ public class CategoryController {
 
     }
 
-    //
+
     @GetMapping("/categories/{categoryId}/")
     public Optional<Category> getCategory(@PathVariable(value = "categoryId") Long categoryId){
 //        Optional<Category> category = categoryRepository.findById(categoryId);
@@ -81,11 +82,11 @@ public class CategoryController {
 //        }
 //        return categoryService.updateCategory(categoryId, categoryObject);
     }
-    @DeleteMapping("/categories/{categoryId}")
-    public String deleteCategory(@PathVariable(value = "categoryId") Long categoryId) {
-        System.out.println("calling deleteCategory ==>");
-        return categoryService.deleteCategory(categoryId);
-    }
+//    @DeleteMapping("/categories/{categoryId}")
+//    public String deleteCategory(@PathVariable(value = "categoryId") Long categoryId) {
+//        System.out.println("calling deleteCategory ==>");
+//        return categoryService.deleteCategory(categoryId);
+//    }
 
     @PostMapping("/categories/{categoryId}/activities/")
     public Activity createCategoryActivity(@PathVariable(value="categoryId") Long categoryId, @RequestBody Activity activityObject){
@@ -98,12 +99,12 @@ public class CategoryController {
     }
 
     @GetMapping("/categories/{categoryId}/activities/{activityId}/")
-    public Activity getCategoryActivity(@PathVariable(value="categoryId") Long categoryId, @PathVariable(value = "activityId") Long activityId){
+    public String getCategoryActivity(@PathVariable(value="categoryId") Long categoryId, @PathVariable(value = "activityId") Long activityId){
         return categoryService.getCategoryActivity(categoryId, activityId);
     }
 
     @PutMapping("/categories/{categoryId}/activities/{activityId}/")
-    public Activity updateCategoryActivity(
+    public String updateCategoryActivity(
             @PathVariable(value = "categoryId") Long categoryId,
             @PathVariable(value = "activityId") Long activityId,
             @RequestBody Activity activityObject){
@@ -111,7 +112,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/categories/{categoryId}/activities/{activityId}/")
-    public Recipe deleteCategoryActivity(
+    public String deleteCategoryActivity(
             @PathVariable(value = "categoryId") Long categoryId,
             @PathVariable(value = "activityId") Long activityId){
         return categoryService.deleteCategoryActivity(categoryId, activityId);

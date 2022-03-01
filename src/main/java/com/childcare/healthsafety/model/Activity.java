@@ -9,9 +9,6 @@ import javax.persistence.*;
 @Table(name = "activities")// names a table activities
 public class Activity {
 
-
-
-
   @Id
   @Column
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +26,11 @@ public class Activity {
     this.name = name;
   }
 
-  @ManyToOne
-  @JoinColumn(name = "activity_id")
-  private Activity activity;
+//  @ManyToOne
+////  @JoinColumn(name = "activity_id")
+//
+//  @JsonIgnore
+//  private Activity activity;
 
   public void setCategory(Category category) {
     this.category = category;
