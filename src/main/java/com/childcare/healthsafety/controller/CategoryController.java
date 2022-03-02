@@ -52,7 +52,6 @@ public class CategoryController {
 
     }
 
-
     @GetMapping("/categories/{categoryId}/")
     public Optional<Category> getCategory(@PathVariable(value = "categoryId") Long categoryId){
 //        Optional<Category> category = categoryRepository.findById(categoryId);
